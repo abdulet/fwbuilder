@@ -11,6 +11,8 @@ from junosdecode import juniper_decrypt
 path="."
 dir_xml="xml"
 dir_csv="../../csv"
+configxml="backupfw.xml"
+tree = ET.parse(path + "/" + configxml)
 
 def cidr_to_netmask(cidr):
     network, net_bits = cidr.split('/')
@@ -112,8 +114,7 @@ def policies2csv ():
     ENABLE="false"
     
     #Read the input xml file into an Elementree object
-    tree = ET.parse(path+"/"+dir_xml+"/"+"policies.xml")
-    policies = tree.getroot()
+    policies = tree.getroot().findall("./security/policies/policy/policy")
 
     #Define the list of xml tags which we expect to process
     knowntags = ["policies", "policy", "name", "match", "source-address", "destination-address", "then", "permit", "deny", "log", "session-init", "session-close", "ipsec-vpn", "tunnel", "application"]
@@ -203,8 +204,7 @@ def objects2csv():
     print "Parsing objects"
     
     #Read the input xml file into an Elementree object
-    tree = ET.parse( path + "/" + dir_xml + "/" + "zones.xml" )
-    root = tree.getroot()
+    root = tree.getroot().findall("./security/zones")
 
     #Define the list of xml tags which we expect to process
     knowntags = [ "zones", "functional-zone", "management", "host-inbound-traffic", "system-services", "security-zone", "address-book", "screen", "address", "address-set", "name", "description", "ip-prefix", "interfaces", "protocols", "dns-name"]
@@ -260,8 +260,7 @@ def users2csv():
 
     print "Parsing users"
     #Read the input xml file into an Elementree object
-    tree = ET.parse(path+"/"+dir_xml+"/"+"users.xml")
-    root = tree.getroot()
+    root = tree.getroot().findall("./access")
 
     #Define the list of xml tags which we expect to process
     knowntags = ["access", "profile", "name", "authentication-order", "client", "firewall-user", "password", "address-assignment", "pool", "family", "inet", "network", "range", "low", "high", "xauth-attributes", "primary-dns", "secondary-dns", "chap-secret", "default-profile", "firewall-authentication", "web-authentication" ]
@@ -310,8 +309,7 @@ def users2csv():
 def apps2csv():
     print "Parsing apps"
     #Read the input xml file into an Elementree object
-    tree = ET.parse(path+"/"+dir_xml+"/"+"applications.xml")
-    root = tree.getroot()
+    root = tree.getroot().findall("./applications")
 
     #Define the list of xml tags which we expect to process
     knowntags = [ "applications", "application", "name", "protocol", "source-port", "destination-port", "icmp-type", "term", "application-set" ]
@@ -376,9 +374,18 @@ def apps2csv():
 
 def nat2csv():
     print "NAT import not yet implemented!!!"
+    root = tree.getroot().findall("./security/nat")
+
+def routes2csv():
+    print "Routes not yet implemented!!!"
+    root = tree.getroot().findall("./routing-options/static")
+
+#TODO:
+#xmllint --xpath 'configuration/firewall' backupfw.xml > xml/firewall.xml
 
 policies2csv()
 objects2csv()
 users2csv()
 nat2csv()
 apps2csv()
+routes2csv()
