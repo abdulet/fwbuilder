@@ -1,0 +1,68 @@
+create user Applus
+modify users Applus auth_method 'Internal Password'
+create user BBDDtelefon
+modify users BBDDtelefon auth_method 'Internal Password'
+create user altran
+modify users altran auth_method 'Internal Password'
+create user carpn
+modify users carpn auth_method 'Internal Password'
+create user comodin
+modify users comodin auth_method 'Internal Password'
+create user galofre
+modify users galofre auth_method 'Internal Password'
+create user gematic
+modify users gematic auth_method 'Internal Password'
+create user grupocastilla
+modify users grupocastilla auth_method 'Internal Password'
+create user idm
+modify users idm auth_method 'Internal Password'
+create user interd4u
+modify users interd4u auth_method 'Internal Password'
+create user isystems
+modify users isystems auth_method 'Internal Password'
+create user mimacom
+modify users mimacom auth_method 'Internal Password'
+create user nextret
+modify users nextret auth_method 'Internal Password'
+create user nexus
+modify users nexus auth_method 'Internal Password'
+create user opentrends
+modify users opentrends auth_method 'Internal Password'
+create user pentaho
+modify users pentaho auth_method 'Internal Password'
+create user programaria
+modify users programaria auth_method 'Internal Password'
+create user prueba
+modify users prueba auth_method 'Internal Password'
+create user residus
+modify users residus auth_method 'Internal Password'
+create user satec
+modify users satec auth_method 'Internal Password'
+create user tecnocom
+modify users tecnocom auth_method 'Internal Password'
+create user test
+modify users test auth_method 'Internal Password'
+update_all
+set_pass Applus '1Q2w3e4r'
+set_pass BBDDtelefon '1Q2w3e4r'
+set_pass altran '4ltr4nr3s1dvs'
+set_pass carpn '1Q2w3e4r'
+set_pass comodin '1q2w3e4r'
+set_pass galofre 'info231'
+set_pass gematic '1Q2w3e4r'
+set_pass grupocastilla '1Q2w3e4r'
+set_pass idm '1Q2w3e4r'
+set_pass interd4u '1Q2w3e4r'
+set_pass isystems 'sd4fg6jy'
+set_pass mimacom '1Q2w3e4r'
+set_pass nextret '1Q2w3e4r'
+set_pass nexus '1Q2w3e4r'
+set_pass opentrends '1Q2w3e4r'
+set_pass pentaho '1Q2w3e4r'
+set_pass programaria 'yh4gts6'
+set_pass prueba 'c3t@s2011'
+set_pass residus 'x9joM19s0z'
+set_pass satec 'c3t@s2011'
+set_pass tecnocom '1Q2w3e4r'
+set_pass test 'test'
+update_all

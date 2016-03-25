@@ -1,0 +1,2 @@
+216,accept,Log,any,Videoconferencia_17_11_2015 videconferenciaprova1_17_11_2015,any,false va en el 119 debajo de GWEBS-HERCULES
+220,accept,None,any,FW_SCPRAC,any,false va en el 168 debajo de XARXASATEC-INTINTERNET

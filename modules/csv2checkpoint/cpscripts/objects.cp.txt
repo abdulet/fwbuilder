@@ -1,0 +1,636 @@
+create host_plain webtest_blade.residus.loc
+modify network_objects webtest_blade.residus.loc ipaddr 10.232.118.151
+modify network_objects webtest_blade.residus.loc comments ""
+create host_plain webserver-e3p.residus.loc
+modify network_objects webserver-e3p.residus.loc ipaddr 10.232.118.150
+modify network_objects webserver-e3p.residus.loc comments ""
+create host_plain webserver.residus.loc
+modify network_objects webserver.residus.loc ipaddr 10.232.118.149
+modify network_objects webserver.residus.loc comments ""
+create network gestio_vmware
+modify network_objects gestio_vmware netmask 255.255.255.0
+modify network_objects gestio_vmware ipaddr 3.1.1.0
+modify network_objects gestio_vmware comments ""
+create host_plain viruswall
+modify network_objects viruswall ipaddr 10.232.118.147
+modify network_objects viruswall comments ""
+create host_plain bluecoat
+modify network_objects bluecoat ipaddr 10.232.96.88
+modify network_objects bluecoat comments ""
+create host_plain galofre.residus.loc
+modify network_objects galofre.residus.loc ipaddr 10.232.96.7
+modify network_objects galofre.residus.loc comments ""
+create host_plain vilademunt.residus.loc
+modify network_objects vilademunt.residus.loc ipaddr 10.232.96.28
+modify network_objects vilademunt.residus.loc comments ""
+create host_plain vilademunt1.residus.loc
+modify network_objects vilademunt1.residus.loc ipaddr 10.232.97.92
+modify network_objects vilademunt1.residus.loc comments ""
+create network residus.loc
+modify network_objects residus.loc netmask 255.255.224.0
+modify network_objects residus.loc ipaddr 10.232.96.0
+modify network_objects residus.loc comments ""
+create host_plain vpn-ext
+modify network_objects vpn-ext ipaddr 10.232.118.148
+modify network_objects vpn-ext comments ""
+create host_plain openview.residus.loc
+modify network_objects openview.residus.loc ipaddr 10.232.119.133
+modify network_objects openview.residus.loc comments ""
+create network vlan1.residus.loc
+modify network_objects vlan1.residus.loc netmask 255.255.252.0
+modify network_objects vlan1.residus.loc ipaddr 10.232.96.0
+modify network_objects vlan1.residus.loc comments ""
+create network carpn.residus.loc
+modify network_objects carpn.residus.loc netmask 255.255.255.0
+modify network_objects carpn.residus.loc ipaddr 10.232.126.0
+modify network_objects carpn.residus.loc comments ""
+create host_plain client_vpn_jun2
+modify network_objects client_vpn_jun2 ipaddr 10.232.96.122
+modify network_objects client_vpn_jun2 comments ""
+create host_plain client_vpn_jun3
+modify network_objects client_vpn_jun3 ipaddr 10.232.96.123
+modify network_objects client_vpn_jun3 comments ""
+create host_plain client_vpn_jun4
+modify network_objects client_vpn_jun4 ipaddr 10.232.96.124
+modify network_objects client_vpn_jun4 comments ""
+create host_plain client_vpn_jun5
+modify network_objects client_vpn_jun5 ipaddr 10.232.96.125
+modify network_objects client_vpn_jun5 comments ""
+create host_plain client_vpn_jun6
+modify network_objects client_vpn_jun6 ipaddr 10.232.96.126
+modify network_objects client_vpn_jun6 comments ""
+create host_plain client_vpn_jun7
+modify network_objects client_vpn_jun7 ipaddr 10.232.96.127
+modify network_objects client_vpn_jun7 comments ""
+create host_plain client_vpn_jun8
+modify network_objects client_vpn_jun8 ipaddr 10.232.96.128
+modify network_objects client_vpn_jun8 comments ""
+create host_plain client_vpn_jun9
+modify network_objects client_vpn_jun9 ipaddr 10.232.96.129
+modify network_objects client_vpn_jun9 comments ""
+create host_plain client_vpn_jun10
+modify network_objects client_vpn_jun10 ipaddr 10.232.96.130
+modify network_objects client_vpn_jun10 comments ""
+create host_plain client_vpn_jun_1
+modify network_objects client_vpn_jun_1 ipaddr 10.232.96.121
+modify network_objects client_vpn_jun_1 comments ""
+create network amposta.residus.loc
+modify network_objects amposta.residus.loc netmask 255.255.255.0
+modify network_objects amposta.residus.loc ipaddr 10.232.125.0
+modify network_objects amposta.residus.loc comments ""
+create network girona.residus.loc
+modify network_objects girona.residus.loc netmask 255.255.255.0
+modify network_objects girona.residus.loc ipaddr 10.232.122.0
+modify network_objects girona.residus.loc comments ""
+create network laboratori.residus.loc
+modify network_objects laboratori.residus.loc netmask 255.255.255.0
+modify network_objects laboratori.residus.loc ipaddr 10.232.120.0
+modify network_objects laboratori.residus.loc comments ""
+create network lleida.residus.loc
+modify network_objects lleida.residus.loc netmask 255.255.255.0
+modify network_objects lleida.residus.loc ipaddr 10.232.123.0
+modify network_objects lleida.residus.loc comments ""
+create network mobile.residus.loc
+modify network_objects mobile.residus.loc netmask 255.255.255.0
+modify network_objects mobile.residus.loc ipaddr 10.232.124.0
+modify network_objects mobile.residus.loc comments ""
+create network net_10.232.104.0
+modify network_objects net_10.232.104.0 netmask 255.255.255.0
+modify network_objects net_10.232.104.0 ipaddr 10.232.104.0
+modify network_objects net_10.232.104.0 comments ""
+create network tarragona.residus.loc
+modify network_objects tarragona.residus.loc netmask 255.255.255.0
+modify network_objects tarragona.residus.loc ipaddr 10.232.121.0
+modify network_objects tarragona.residus.loc comments ""
+create network vlan10.residus.loc
+modify network_objects vlan10.residus.loc netmask 255.255.255.240
+modify network_objects vlan10.residus.loc ipaddr 10.232.118.144
+modify network_objects vlan10.residus.loc comments ""
+create host_plain int-internal
+modify network_objects int-internal ipaddr 10.232.96.254
+modify network_objects int-internal comments ""
+create host_plain int-dmz
+modify network_objects int-dmz ipaddr 10.232.118.158
+modify network_objects int-dmz comments ""
+create host_plain int-xcat
+modify network_objects int-xcat ipaddr 10.232.119.2
+modify network_objects int-xcat comments ""
+create host_plain int-vpn
+modify network_objects int-vpn ipaddr 10.232.119.130
+modify network_objects int-vpn comments ""
+create host_plain vgayatest.residus.loc
+modify network_objects vgayatest.residus.loc ipaddr 10.232.96.115
+modify network_objects vgayatest.residus.loc comments "Servidor de proves per a E3P"
+create host_plain vhera.residus.loc
+modify network_objects vhera.residus.loc ipaddr 10.232.96.102
+modify network_objects vhera.residus.loc comments ""
+create host_plain vperseo.residus.loc
+modify network_objects vperseo.residus.loc ipaddr 10.232.96.100
+modify network_objects vperseo.residus.loc comments ""
+create host_plain vzeus.residus.loc
+modify network_objects vzeus.residus.loc ipaddr 10.232.96.101
+modify network_objects vzeus.residus.loc comments ""
+create host_plain corbcn02.residus.loc
+modify network_objects corbcn02.residus.loc ipaddr 10.232.96.23
+modify network_objects corbcn02.residus.loc comments ""
+create host_plain weblin.residus.loc
+modify network_objects weblin.residus.loc ipaddr 10.232.118.152
+modify network_objects weblin.residus.loc comments ""
+create host_plain webserver_map
+modify network_objects webserver_map ipaddr 10.232.118.154
+modify network_objects webserver_map comments ""
+create host_plain galofrexp.residus.loc
+modify network_objects galofrexp.residus.loc ipaddr 10.232.96.34
+modify network_objects galofrexp.residus.loc comments ""
+create host_plain luisvegaxp.residus.loc
+modify network_objects luisvegaxp.residus.loc ipaddr 10.232.96.25
+modify network_objects luisvegaxp.residus.loc comments ""
+create host_plain system.residus.loc
+modify network_objects system.residus.loc ipaddr 10.232.97.9
+modify network_objects system.residus.loc comments ""
+create host_plain oraculo.residus.loc
+modify network_objects oraculo.residus.loc ipaddr 10.232.96.137
+modify network_objects oraculo.residus.loc comments ""
+create host_plain tgbcn01.residus.loc
+modify network_objects tgbcn01.residus.loc ipaddr 10.232.118.156
+modify network_objects tgbcn01.residus.loc comments "Servidor Internet Exchange"
+create host_plain csgbcn01.residus.loc
+modify network_objects csgbcn01.residus.loc ipaddr 10.232.118.146
+modify network_objects csgbcn01.residus.loc comments ""
+create host_plain seguretat_arc
+modify network_objects seguretat_arc ipaddr 10.232.96.117
+modify network_objects seguretat_arc comments ""
+create host_plain pc_tost
+modify network_objects pc_tost ipaddr 10.232.96.11
+modify network_objects pc_tost comments "Ip privada PC Josep Maria Tost"
+create host_plain pc_angel
+modify network_objects pc_angel ipaddr 10.232.96.106
+modify network_objects pc_angel comments ""
+create host_plain cobcn01.residus.loc
+modify network_objects cobcn01.residus.loc ipaddr 10.232.96.133
+modify network_objects cobcn01.residus.loc comments ""
+create host_plain wf_convidats
+modify network_objects wf_convidats ipaddr 10.232.109.2
+modify network_objects wf_convidats comments "Xarxa WIFI porva sala Consell D"
+create host_plain videoconferencia
+modify network_objects videoconferencia ipaddr 10.232.96.73
+modify network_objects videoconferencia comments ""
+create network xarxa_wifi_arc
+modify network_objects xarxa_wifi_arc netmask 255.255.255.0
+modify network_objects xarxa_wifi_arc ipaddr 10.232.109.0
+modify network_objects xarxa_wifi_arc comments ""
+create network wifi-carpn
+modify network_objects wifi-carpn netmask 255.255.255.0
+modify network_objects wifi-carpn ipaddr 172.16.1.0
+modify network_objects wifi-carpn comments ""
+create host_plain bytepas
+modify network_objects bytepas ipaddr 10.232.96.105
+modify network_objects bytepas comments ""
+create host_plain tmmsbcn01.residus.loc
+modify network_objects tmmsbcn01.residus.loc ipaddr 10.232.96.144
+modify network_objects tmmsbcn01.residus.loc comments ""
+create host_plain video_familia
+modify network_objects video_familia ipaddr 83.247.129.65
+modify network_objects video_familia comments ""
+create network xarxa_10.232.96.0_22
+modify network_objects xarxa_10.232.96.0_22 netmask 255.255.252.0
+modify network_objects xarxa_10.232.96.0_22 ipaddr 10.232.96.0
+modify network_objects xarxa_10.232.96.0_22 comments ""
+create host_plain ip_pruebas_asp_gencat
+modify network_objects ip_pruebas_asp_gencat ipaddr 10.30.12.141
+modify network_objects ip_pruebas_asp_gencat comments ""
+create host_plain eacat_prep_1
+modify network_objects eacat_prep_1 ipaddr 172.30.17.12
+modify network_objects eacat_prep_1 comments ""
+create host_plain eacat_prep_2
+modify network_objects eacat_prep_2 ipaddr 172.30.17.13
+modify network_objects eacat_prep_2 comments ""
+create host_plain eacat_pro
+modify network_objects eacat_pro ipaddr 10.127.4.111
+modify network_objects eacat_pro comments ""
+create host_plain hercules.residus.loc
+modify network_objects hercules.residus.loc ipaddr 10.232.96.138
+modify network_objects hercules.residus.loc comments ""
+create host_plain vpn-int
+modify network_objects vpn-int ipaddr 10.232.119.129
+modify network_objects vpn-int comments ""
+create host_plain radius.residus.loc
+modify network_objects radius.residus.loc ipaddr 10.232.96.30
+modify network_objects radius.residus.loc comments ""
+create host_plain dcbcn01.residus.loc
+modify network_objects dcbcn01.residus.loc ipaddr 10.232.96.107
+modify network_objects dcbcn01.residus.loc comments "Domain Controller"
+create host_plain dcbcn02.residus.loc
+modify network_objects dcbcn02.residus.loc ipaddr 10.232.96.50
+modify network_objects dcbcn02.residus.loc comments "Domain controller"
+create host_plain vmware_prova_nextret
+modify network_objects vmware_prova_nextret ipaddr 10.232.97.146
+modify network_objects vmware_prova_nextret comments ""
+create network xarxa010.gencat.lan
+modify network_objects xarxa010.gencat.lan netmask 255.0.0.0
+modify network_objects xarxa010.gencat.lan ipaddr 10.0.0.0
+modify network_objects xarxa010.gencat.lan comments ""
+create network xarxa192-168.gencat.lan
+modify network_objects xarxa192-168.gencat.lan netmask 255.255.0.0
+modify network_objects xarxa192-168.gencat.lan ipaddr 192.168.0.0
+modify network_objects xarxa192-168.gencat.lan comments ""
+create host_plain server_soracle
+modify network_objects server_soracle ipaddr 10.232.96.89
+modify network_objects server_soracle comments ""
+create host_plain ftp.sarcat.gencat.intranet
+modify network_objects ftp.sarcat.gencat.intranet ipaddr 10.30.1.11
+modify network_objects ftp.sarcat.gencat.intranet comments ""
+create network gencat.net
+modify network_objects gencat.net netmask 255.255.255.0
+modify network_objects gencat.net ipaddr 192.168.136.0
+modify network_objects gencat.net comments ""
+create host_plain ftp.preproduccio.sarcat.gentcat.intranet
+modify network_objects ftp.preproduccio.sarcat.gentcat.intranet ipaddr 192.168.54.50
+modify network_objects ftp.preproduccio.sarcat.gentcat.intranet comments ""
+create host_plain officescan.residus.loc
+modify network_objects officescan.residus.loc ipaddr 10.232.96.11
+modify network_objects officescan.residus.loc comments ""
+create host_plain copbcn01.residus.loc
+modify network_objects copbcn01.residus.loc ipaddr 10.232.96.50
+modify network_objects copbcn01.residus.loc comments ""
+create host_plain gencat_www20
+modify network_objects gencat_www20 ipaddr 83.247.129.61
+modify network_objects gencat_www20 comments ""
+create host_plain residus.gencat.cat
+modify network_objects residus.gencat.cat ipaddr 172.25.12.1
+modify network_objects residus.gencat.cat comments ""
+create host_plain popbcn01.residus.loc
+modify network_objects popbcn01.residus.loc ipaddr 10.232.96.57
+modify network_objects popbcn01.residus.loc comments ""
+create network xarxa10.232.132.gencat.lan
+modify network_objects xarxa10.232.132.gencat.lan netmask 255.255.255.0
+modify network_objects xarxa10.232.132.gencat.lan ipaddr 10.232.132.0
+modify network_objects xarxa10.232.132.gencat.lan comments ""
+create network xarxa10.38.232.gencat.lan
+modify network_objects xarxa10.38.232.gencat.lan netmask 255.255.255.128
+modify network_objects xarxa10.38.232.gencat.lan ipaddr 10.38.232.0
+modify network_objects xarxa10.38.232.gencat.lan comments ""
+create host_plain citrix.residus.loc
+modify network_objects citrix.residus.loc ipaddr 10.232.96.39
+modify network_objects citrix.residus.loc comments ""
+create host_plain gecat1.gencat.net
+modify network_objects gecat1.gencat.net ipaddr 10.32.9.2
+modify network_objects gecat1.gencat.net comments ""
+create host_plain gecat2.gencat.net
+modify network_objects gecat2.gencat.net ipaddr 10.32.9.3
+modify network_objects gecat2.gencat.net comments ""
+create host_plain gecat3.gencat.net
+modify network_objects gecat3.gencat.net ipaddr 10.32.9.12
+modify network_objects gecat3.gencat.net comments ""
+create host_plain gecatimpressoraarc.gencat.net
+modify network_objects gecatimpressoraarc.gencat.net ipaddr 10.232.96.202
+modify network_objects gecatimpressoraarc.gencat.net comments ""
+create host_plain sig_corporatiu_produccio
+modify network_objects sig_corporatiu_produccio ipaddr 10.50.194.10
+modify network_objects sig_corporatiu_produccio comments ""
+create host_plain sig_corporatiu_preproduccio
+modify network_objects sig_corporatiu_preproduccio ipaddr 10.51.194.10
+modify network_objects sig_corporatiu_preproduccio comments ""
+create host_plain atenea-ilo
+modify network_objects atenea-ilo ipaddr 10.232.97.25
+modify network_objects atenea-ilo comments ""
+create host_plain circe.residus.loc
+modify network_objects circe.residus.loc ipaddr 10.232.96.63
+modify network_objects circe.residus.loc comments ""
+create host_plain atenea.residus.loc
+modify network_objects atenea.residus.loc ipaddr 10.232.96.5
+modify network_objects atenea.residus.loc comments ""
+create host_plain hades.residus.loc
+modify network_objects hades.residus.loc ipaddr 10.232.96.6
+modify network_objects hades.residus.loc comments ""
+create host_plain isee-hp
+modify network_objects isee-hp ipaddr 192.6.126.144
+modify network_objects isee-hp comments ""
+create network vmwaregestion
+modify network_objects vmwaregestion netmask 255.255.255.248
+modify network_objects vmwaregestion ipaddr 10.232.105.248
+modify network_objects vmwaregestion comments "Xarxa gestio VmWare"
+create host_plain carpnserver
+modify network_objects carpnserver ipaddr 10.232.126.1
+modify network_objects carpnserver comments "Servidor CARPN"
+create host_plain ippub_carpn
+modify network_objects ippub_carpn ipaddr 62.97.99.181
+modify network_objects ippub_carpn comments "Ip Publica Lotus Carpn"
+create host_plain web_arc_f5
+modify network_objects web_arc_f5 ipaddr 10.232.118.145
+modify network_objects web_arc_f5 comments ""
+create host_plain sarcat
+modify network_objects sarcat ipaddr 62.97.99.188
+modify network_objects sarcat comments "sarcat"
+create host_plain unicast-62.97.99.182_32
+modify network_objects unicast-62.97.99.182_32 ipaddr 62.97.99.182
+modify network_objects unicast-62.97.99.182_32 comments ""
+create host_plain server_oracle
+modify network_objects server_oracle ipaddr 10.232.96.87
+modify network_objects server_oracle comments ""
+create host_plain tgbcn01.residus.loc-scu
+modify network_objects tgbcn01.residus.loc-scu ipaddr 10.232.118.152
+modify network_objects tgbcn01.residus.loc-scu comments ""
+create host_plain tgbcn01-sp
+modify network_objects tgbcn01-sp ipaddr 10.232.118.153
+modify network_objects tgbcn01-sp comments ""
+create host_plain tgbcn01.residus.loc-applus
+modify network_objects tgbcn01.residus.loc-applus ipaddr 10.232.118.155
+modify network_objects tgbcn01.residus.loc-applus comments ""
+create host_plain web_gencat.cat
+modify network_objects web_gencat.cat ipaddr 83.247.129.60
+modify network_objects web_gencat.cat comments ""
+create host_plain server_ntp
+modify network_objects server_ntp ipaddr 130.206.3.166
+modify network_objects server_ntp comments ""
+create host_plain server_ntp2
+modify network_objects server_ntp2 ipaddr 150.214.94.5
+modify network_objects server_ntp2 comments ""
+create network xarxa53-64-218.gencat.lan
+modify network_objects xarxa53-64-218.gencat.lan netmask 255.255.255.0
+modify network_objects xarxa53-64-218.gencat.lan ipaddr 53.64.218.0
+modify network_objects xarxa53-64-218.gencat.lan comments ""
+create host_plain server_cyclos
+modify network_objects server_cyclos ipaddr 213.229.187.10
+modify network_objects server_cyclos comments ""
+create host_plain server_interdev4u
+modify network_objects server_interdev4u ipaddr 178.33.112.200
+modify network_objects server_interdev4u comments ""
+create host_plain smtp.gencat.net
+modify network_objects smtp.gencat.net ipaddr 83.247.128.130
+modify network_objects smtp.gencat.net comments ""
+create host_plain dogc.gencat.net
+modify network_objects dogc.gencat.net ipaddr 83.247.129.87
+modify network_objects dogc.gencat.net comments ""
+create host_plain preproduccio.sarcat.intranet.gencat
+modify network_objects preproduccio.sarcat.intranet.gencat ipaddr 10.53.12.10
+modify network_objects preproduccio.sarcat.intranet.gencat comments ""
+create host_plain net_83.247.129.56
+modify network_objects net_83.247.129.56 ipaddr 83.247.129.56
+modify network_objects net_83.247.129.56 comments "preproduccio.sarcat.gencat.intranet"
+create domain .sarcat.intranet.gencat.cat
+modify network_objects .sarcat.intranet.gencat.cat comments SARCAT produccio
+create host_plain int-internet
+modify network_objects int-internet ipaddr 62.97.99.129
+modify network_objects int-internet comments ""
+create host_plain fw_scprac
+modify network_objects fw_scprac ipaddr 212.31.61.36
+modify network_objects fw_scprac comments "FW SCPARC"
+create network dmz_public_address
+modify network_objects dmz_public_address netmask 255.255.255.192
+modify network_objects dmz_public_address ipaddr 62.97.99.128
+modify network_objects dmz_public_address comments ""
+create host_plain clients_internet
+modify network_objects clients_internet ipaddr 62.97.99.180
+modify network_objects clients_internet comments ""
+create host_plain server_ftp
+modify network_objects server_ftp ipaddr 87.216.31.211
+modify network_objects server_ftp comments ""
+create host_plain server_ftp_cometa
+modify network_objects server_ftp_cometa ipaddr 195.54.62.70
+modify network_objects server_ftp_cometa comments "Servidor FTP extern ARC"
+create host_plain minguell
+modify network_objects minguell ipaddr 84.88.72.39
+modify network_objects minguell comments "FTP Minguell"
+create host_plain projecte_gef
+modify network_objects projecte_gef ipaddr 194.219.91.29
+modify network_objects projecte_gef comments ""
+create network bbva
+modify network_objects bbva netmask 255.255.255.0
+modify network_objects bbva ipaddr 194.224.215.0
+modify network_objects bbva comments ""
+create host_plain seguridad_social_nominas
+modify network_objects seguridad_social_nominas ipaddr 194.179.55.69
+modify network_objects seguridad_social_nominas comments ""
+create host_plain absys
+modify network_objects absys ipaddr 93.90.31.136
+modify network_objects absys comments ""
+create host_plain videoconferencia_prova
+modify network_objects videoconferencia_prova ipaddr 217.125.143.18
+modify network_objects videoconferencia_prova comments ""
+create host_plain videconferenciaprova1_17_11_2015
+modify network_objects videconferenciaprova1_17_11_2015 ipaddr 80.26.88.154
+modify network_objects videconferenciaprova1_17_11_2015 comments ""
+create host_plain videoconf-31082010
+modify network_objects videoconf-31082010 ipaddr 83.56.226.19
+modify network_objects videoconf-31082010 comments ""
+create host_plain videoconfer_19_2_2015
+modify network_objects videoconfer_19_2_2015 ipaddr 93.188.137.196
+modify network_objects videoconfer_19_2_2015 comments ""
+create host_plain videoconferencia_11_01_2011
+modify network_objects videoconferencia_11_01_2011 ipaddr 212.234.114.99
+modify network_objects videoconferencia_11_01_2011 comments ""
+create host_plain videoconferencia_17_11_2015
+modify network_objects videoconferencia_17_11_2015 ipaddr 93.188.53.40
+modify network_objects videoconferencia_17_11_2015 comments ""
+create host_plain videoconferenciaprova_17_11_2015
+modify network_objects videoconferenciaprova_17_11_2015 ipaddr 84.88.36.9
+modify network_objects videoconferenciaprova_17_11_2015 comments ""
+create network xarxa195.76.168
+modify network_objects xarxa195.76.168 netmask 255.255.255.0
+modify network_objects xarxa195.76.168 ipaddr 195.76.168.0
+modify network_objects xarxa195.76.168 comments ""
+create host_plain fumanya
+modify network_objects fumanya ipaddr 80.26.50.168
+modify network_objects fumanya comments ""
+create domain .sis-t.redsys.es
+modify network_objects .sis-t.redsys.es comments 
+create domain .martin.dexmatech.com
+modify network_objects .martin.dexmatech.com comments 
+create host_plain esabe_1
+modify network_objects esabe_1 ipaddr 188.168.193.110
+modify network_objects esabe_1 comments ""
+create host_plain esabe_2
+modify network_objects esabe_2 ipaddr 203.105.1.155
+modify network_objects esabe_2 comments ""
+create network esabe_3
+modify network_objects esabe_3 netmask 255.255.255.128
+modify network_objects esabe_3 ipaddr 195.81.195.128
+modify network_objects esabe_3 comments ""
+create host_plain citrix_acces_neus_gallart
+modify network_objects citrix_acces_neus_gallart ipaddr 86.109.110.70
+modify network_objects citrix_acces_neus_gallart comments ""
+create host_plain vodafone_arc_proves
+modify network_objects vodafone_arc_proves ipaddr 77.210.84.254
+modify network_objects vodafone_arc_proves comments ""
+create host_plain openmet
+modify network_objects openmet ipaddr 87.216.17.125
+modify network_objects openmet comments "acces IMAP Openmet"
+create network xarxa_wifi_pub
+modify network_objects xarxa_wifi_pub netmask 255.255.255.0
+modify network_objects xarxa_wifi_pub ipaddr 10.232.108.0
+modify network_objects xarxa_wifi_pub comments ""
+create host_plain interdev4u
+modify network_objects interdev4u ipaddr 87.216.183.67
+modify network_objects interdev4u comments ""
+create network xarxa_satec
+modify network_objects xarxa_satec netmask 255.255.224.0
+modify network_objects xarxa_satec ipaddr 213.164.32.0
+modify network_objects xarxa_satec comments ""
+create host_plain oesia
+modify network_objects oesia ipaddr 217.126.115.25
+modify network_objects oesia comments ""
+create host_plain oesia-provis
+modify network_objects oesia-provis ipaddr 80.33.132.82
+modify network_objects oesia-provis comments ""
+create host_plain oesia-tmp
+modify network_objects oesia-tmp ipaddr 80.253.72.165
+modify network_objects oesia-tmp comments ""
+create host_plain oesia2
+modify network_objects oesia2 ipaddr 213.98.165.61
+modify network_objects oesia2 comments ""
+create host_plain oesia3
+modify network_objects oesia3 ipaddr 80.26.96.212
+modify network_objects oesia3 comments ""
+create host_plain oesia_1
+modify network_objects oesia_1 ipaddr 217.126.115.25
+modify network_objects oesia_1 comments ""
+create host_plain opentrends1
+modify network_objects opentrends1 ipaddr 62.97.110.250
+modify network_objects opentrends1 comments ""
+create host_plain opentrends2
+modify network_objects opentrends2 ipaddr 213.229.148.110
+modify network_objects opentrends2 comments ""
+create host_plain programaria
+modify network_objects programaria ipaddr 87.216.178.71
+modify network_objects programaria comments "abans 90.164.198.60"
+create domain .programaria.ddns.jazztel.es
+modify network_objects .programaria.ddns.jazztel.es comments Programaria domain
+create host_plain vodafone_arc_proves_wifi
+modify network_objects vodafone_arc_proves_wifi ipaddr 77.210.179.72
+modify network_objects vodafone_arc_proves_wifi comments ""
+create host_plain vodafone_arc_wifi
+modify network_objects vodafone_arc_wifi ipaddr 77.210.163.156
+modify network_objects vodafone_arc_wifi comments ""
+create host_plain bbddtelefon
+modify network_objects bbddtelefon ipaddr 188.79.44.46
+modify network_objects bbddtelefon comments ""
+create host_plain isoco
+modify network_objects isoco ipaddr 217.116.13.106
+modify network_objects isoco comments ""
+create host_plain isoco-temp
+modify network_objects isoco-temp ipaddr 88.87.199.50
+modify network_objects isoco-temp comments ""
+create host_plain capgemini
+modify network_objects capgemini ipaddr 91.126.133.84
+modify network_objects capgemini comments ""
+create host_plain ono
+modify network_objects ono ipaddr 62.81.142.27
+modify network_objects ono comments ""
+create network xarxa_nextret
+modify network_objects xarxa_nextret netmask 255.255.255.192
+modify network_objects xarxa_nextret ipaddr 213.170.40.192
+modify network_objects xarxa_nextret comments ""
+create host_plain audifilm
+modify network_objects audifilm ipaddr 81.45.255.6
+modify network_objects audifilm comments ""
+create host_plain audifilm_1
+modify network_objects audifilm_1 ipaddr 87.216.182.159
+modify network_objects audifilm_1 comments ""
+create host_plain audifilm_2
+modify network_objects audifilm_2 ipaddr 80.64.38.15
+modify network_objects audifilm_2 comments ""
+create host_plain audifilm_3
+modify network_objects audifilm_3 ipaddr 80.64.37.120
+modify network_objects audifilm_3 comments ""
+create host_plain atomz_actual
+modify network_objects atomz_actual ipaddr 64.41.153.50
+modify network_objects atomz_actual comments ""
+create host_plain atomz_nova
+modify network_objects atomz_nova ipaddr 64.191.204.2
+modify network_objects atomz_nova comments ""
+create host_plain galofre-casa
+modify network_objects galofre-casa ipaddr 212.166.242.39
+modify network_objects galofre-casa comments ""
+create host_plain ippub_corbcn02
+modify network_objects ippub_corbcn02 ipaddr 62.97.99.146
+modify network_objects ippub_corbcn02 comments ""
+create host_plain tgbcn01-scu
+modify network_objects tgbcn01-scu ipaddr 62.97.99.175
+modify network_objects tgbcn01-scu comments ""
+update_all
+create network_object_group clients_vpn_juniper
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun2
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun3
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun4
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun5
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun6
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun7
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun8
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun9
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun10
+addelement network_objects clients_vpn_juniper '' network_objects:client_vpn_jun_1
+create network_object_group xarxa-ipsec
+addelement network_objects xarxa-ipsec '' network_objects:amposta.residus.loc
+addelement network_objects xarxa-ipsec '' network_objects:girona.residus.loc
+addelement network_objects xarxa-ipsec '' network_objects:laboratori.residus.loc
+addelement network_objects xarxa-ipsec '' network_objects:lleida.residus.loc
+addelement network_objects xarxa-ipsec '' network_objects:mobile.residus.loc
+addelement network_objects xarxa-ipsec '' network_objects:net_10.232.104.0
+addelement network_objects xarxa-ipsec '' network_objects:tarragona.residus.loc
+create network_object_group ints-int-fw
+addelement network_objects ints-int-fw '' network_objects:int-internal
+addelement network_objects ints-int-fw '' network_objects:int-dmz
+addelement network_objects ints-int-fw '' network_objects:int-xcat
+addelement network_objects ints-int-fw '' network_objects:int-vpn
+create network_object_group servidorsdesenvolupament
+addelement network_objects servidorsdesenvolupament '' network_objects:vgayatest.residus.loc
+addelement network_objects servidorsdesenvolupament '' network_objects:vhera.residus.loc
+addelement network_objects servidorsdesenvolupament '' network_objects:vperseo.residus.loc
+addelement network_objects servidorsdesenvolupament '' network_objects:vzeus.residus.loc
+create network_object_group grup-webs
+addelement network_objects grup-webs '' network_objects:weblin.residus.loc
+addelement network_objects grup-webs '' network_objects:webserver.residus.loc
+addelement network_objects grup-webs '' network_objects:webserver-e3p.residus.loc
+addelement network_objects grup-webs '' network_objects:webserver_map
+addelement network_objects grup-webs '' network_objects:webtest_blade.residus.loc
+create network_object_group fw-admins
+addelement network_objects fw-admins '' network_objects:galofre.residus.loc
+addelement network_objects fw-admins '' network_objects:galofrexp.residus.loc
+addelement network_objects fw-admins '' network_objects:luisvegaxp.residus.loc
+addelement network_objects fw-admins '' network_objects:system.residus.loc
+addelement network_objects fw-admins '' network_objects:vilademunt.residus.loc
+create network_object_group eacat_prep
+addelement network_objects eacat_prep '' network_objects:eacat_prep_1
+addelement network_objects eacat_prep '' network_objects:eacat_prep_2
+create network_object_group grup-dmz
+addelement network_objects grup-dmz '' network_objects:weblin.residus.loc
+addelement network_objects grup-dmz '' network_objects:webserver.residus.loc
+addelement network_objects grup-dmz '' network_objects:webserver_map
+addelement network_objects grup-dmz '' network_objects:webserver-e3p.residus.loc
+addelement network_objects grup-dmz '' network_objects:webtest_blade.residus.loc
+create network_object_group servers_ntp
+addelement network_objects servers_ntp '' network_objects:server_ntp
+addelement network_objects servers_ntp '' network_objects:server_ntp2
+create network_object_group videoconf-fora
+addelement network_objects videoconf-fora '' network_objects:videconferenciaprova1_17_11_2015
+addelement network_objects videoconf-fora '' network_objects:videoconf-31082010
+addelement network_objects videoconf-fora '' network_objects:videoconfer_19_2_2015
+addelement network_objects videoconf-fora '' network_objects:videoconferencia_11_01_2011
+addelement network_objects videoconf-fora '' network_objects:videoconferencia_17_11_2015
+addelement network_objects videoconf-fora '' network_objects:videoconferencia_prova
+addelement network_objects videoconf-fora '' network_objects:videoconferenciaprova_17_11_2015
+create network_object_group grup_oesia
+addelement network_objects grup_oesia '' network_objects:oesia
+addelement network_objects grup_oesia '' network_objects:oesia-provis
+addelement network_objects grup_oesia '' network_objects:oesia-tmp
+addelement network_objects grup_oesia '' network_objects:oesia2
+addelement network_objects grup_oesia '' network_objects:oesia3
+addelement network_objects grup_oesia '' network_objects:oesia_1
+create network_object_group sdrdesenvolupament
+addelement network_objects sdrdesenvolupament '' network_objects:opentrends1
+addelement network_objects sdrdesenvolupament '' network_objects:opentrends2
+addelement network_objects sdrdesenvolupament '' network_objects:programaria
+addelement network_objects sdrdesenvolupament '' network_objects:.programaria.ddns.jazztel.es
+addelement network_objects sdrdesenvolupament '' network_objects:vodafone_arc_proves
+addelement network_objects sdrdesenvolupament '' network_objects:vodafone_arc_proves_wifi
+addelement network_objects sdrdesenvolupament '' network_objects:vodafone_arc_wifi
+create network_object_group grup_audifilm
+addelement network_objects grup_audifilm '' network_objects:audifilm
+addelement network_objects grup_audifilm '' network_objects:audifilm_1
+addelement network_objects grup_audifilm '' network_objects:audifilm_2
+addelement network_objects grup_audifilm '' network_objects:audifilm_3
+create network_object_group atomz_grup
+addelement network_objects atomz_grup '' network_objects:atomz_actual
+addelement network_objects atomz_grup '' network_objects:atomz_nova
+update_all
