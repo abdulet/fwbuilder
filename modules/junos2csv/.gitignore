@@ -1,0 +1,4 @@
+# Ignore everything in this directory
+fwbackup.xml
+# Except this file
+!.gitignore
