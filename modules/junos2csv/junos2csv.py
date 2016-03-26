@@ -15,6 +15,9 @@ configxml="backupfw.xml"
 tree = ET.parse(path + "/" + configxml)
 
 def cidr_to_netmask(cidr):
+    """
+    Convert cidr notation to network address and netmask
+    """
     network, net_bits = cidr.split('/')
     host_bits = 32 - int(net_bits)
     netmask = socket.inet_ntoa(struct.pack('!I', (1 << 32) - (1 << host_bits)))
@@ -67,6 +70,9 @@ def writecsv( objects, filename ):
     f.close()
 
 def app2cp ( app ):
+    """
+    Transalte Junos service names to Checkpoint servicenames
+    """
     ret=[]
     if app == "any-ip":
         ret.append("any")
@@ -101,7 +107,6 @@ def app2cp ( app ):
 
     return ret
 
-
 def policies2csv ():
     """
     Process the input xml file wich defines the rules of the fw,
@@ -127,8 +132,7 @@ def policies2csv ():
     checkunktags( knowntags, ET.tostring(policies) )
     checkunkattr( knownattributes, ET.tostring(policies) )
 
-    #Genearte the objects list to store the csv code,
-    #the first line is the csv header
+    #Set csv headers
     objects = [ "Name,Action,Log,Source,Destination,Application,Disabled" ]
 
     #process each policy from the xml code and convert it to csv format 
@@ -216,6 +220,7 @@ def objects2csv():
     checkunktags( knowntags, ET.tostring(root) )
     checkunkattr( knownattributes, ET.tostring(root) )
 
+    #Set csv headers
     zones = root.findall( "security-zone" )
     objects = [ "Type,Name,Address,Netmask,Description" ]
     for zone in zones:
@@ -272,6 +277,7 @@ def users2csv():
     checkunktags( knowntags, ET.tostring(root) )
     checkunkattr( knownattributes, ET.tostring(root) )
 
+    #Set csv headers
     profiles = root.findall("profile")
     objects = [ "Username,Password" ]
     for profile in profiles:
@@ -284,7 +290,7 @@ def users2csv():
             chap = user.find("chap-secret")
             if chap != None:
                 chap = chap.text
-                print "Chap property not implemented yet, check import of user " + username
+                print "TODO: Chap property not implemented yet, check import of user " + username
             #else:
             #    chap=""
 
@@ -325,6 +331,7 @@ def apps2csv():
     checkunktags( knowntags, ET.tostring(root) )
     checkunkattr( knownattributes, ET.tostring(root) )
 
+    #Set csv headers
     lines=[ "Name,Protocol,Srcport,Dstport" ]
     groups = [ "Name,Applications" ]
     for app in root.findall( "application" ):
@@ -373,15 +380,126 @@ def apps2csv():
     print " Application groups retrieved: " + str( len( groups )-1 )
 
 def nat2csv():
-    print "NAT import not yet implemented!!!"
     root = tree.getroot().findall("./security/nat")
 
+    #Define the list of xml tags which we expect to process
+    knowntags = [ "source", "pool", "name", "address", "rule-set", "from", "to", "rule", "zone", "rule", "src-nat-rule-match", "source-address", "destination-address", "then", "source-nat", "pool-name" ]
+
+    #Define the list of xml tag attributes which we expect to process
+    knownattributes = []
+
+    #Ensure that there is not any unexpected tag and attribute
+    checkunktags( knowntags, ET.tostring(root) )
+    checkunkattr( knownattributes, ET.tostring(root) )
+
+    #Set csv headers
+    lines=[ "srcip,srcservice,dstip,dstservice,xlatesrcip,xlatesrcservice,xlatedstip,xlatedstservice" ]
+    for nat in root:
+
+        srcip = []
+        dstip = []
+        srcservice = ""
+        dstservice = ""
+        #Dict to store pool names and IP
+        pooladdress = {}
+
+        if nat.tag == "source":
+            #Process source NAT type
+            for pool in nat.findall("pool"):
+                pooladdress[ pool.find("name").text ] = pool.find("address").find("name").text
+
+            for ruleset in root.findall("rule-set"):
+                for rule in ruleset.findall("rule"):
+                    for src in rule.find("src-nat-rule-match").findall("source-address"):
+                        srcip.append( src.text )
+                    for dst in rule.find("src-nat-rule-match").findall("destination-address"):
+                        dstip.append( dst.text )
+                    poolname = rule.find("then").find("source-nat").find("pool").find("pool-name").text
+                    xlatesrc = pooladdress[ poolname ]
+                    lines.append(" ".join( srcip ) + ",," + " ".join( dstip ) + ",," + xlatesrc + ",,," )
+        if nat.tag == "destination":
+            #Process destination NAT type
+            for pool in nat.findall("pool"):
+                pooladdress[ pool.find("name").text ] = {}
+                pooladdress[ pool.find("name").text ] ["ip"] = pool.find("address").find("ipaddr").text
+                pooladdress[ pool.find("name").text ] ["port"] = pool.find("address").find("port").text
+
+            for ruleset in root.findall("rule-set"):
+                for rule in ruleset.findall("rule"):
+                    dstip = rule.find("dest-nat-rule-match").find("destination-address").find("dst-addr").text
+                    dstservice = rule.find("dest-nat-rule-match").find("destination-port").find("dst-port").text
+                    poolname = pool[ rule.find("then").find("destination-nat").find("pool").find("pool-name").text ]
+                    xlatedstip = pool[ "ip" ]
+                    xlatedstservice = pool[ "port" ]
+                    lines.append(",," + dstip + "," + dstservice + ",,," + xlatedstip + "," + xlatedstservice )
+        if nat.tag == "static":
+            #Process static NAT type
+            #for pool in nat.findall("pool"):
+            #    pooladdress[ pool.find("name").text ] = pool.find("address").find("name").text
+            for ruleset in root.findall("rule-set"):
+                for rule in ruleset.findall("rule"):
+                    for src in rule.find("src-nat-rule-match").findall("source-address"):
+
+        if nat.tag == "proxy-arp":
+            print "INFO: NAT method proxy-arp not yet implemented"
+                    
 def routes2csv():
     print "Routes not yet implemented!!!"
     root = tree.getroot().findall("./routing-options/static")
 
-#TODO:
-#xmllint --xpath 'configuration/firewall' backupfw.xml > xml/firewall.xml
+    #Define the list of xml tags which we expect to process
+    knowntags = [ ]
+
+    #Define the list of xml tag attributes which we expect to process
+    knownattributes = []
+
+    #Ensure that there is not any unexpected tag and attribute
+    checkunktags( knowntags, ET.tostring(root) )
+    checkunkattr( knownattributes, ET.tostring(root) )
+
+    #Set csv headers
+    lines=[ "" ]
+    for app in root.findall( "application" ):
+
+
+def system2csv()
+    #Get DNS name-server
+    #NTP ntp
+    print "System not yet implemented!!!"
+    root = tree.getroot().findall("./system")
+
+    #Define the list of xml tags which we expect to process
+    knowntags = [ ]
+
+    #Define the list of xml tag attributes which we expect to process
+    knownattributes = []
+
+    #Ensure that there is not any unexpected tag and attribute
+    checkunktags( knowntags, ET.tostring(root) )
+    checkunkattr( knownattributes, ET.tostring(root) )
+
+    #Set csv headers
+    lines=[ "" ]
+    for app in root.findall( "application" ):
+
+
+def adminacess2csv():
+    print "Admin access not yet implemented!!!"
+    root = tree.getroot().findall("./firewall")
+
+    #Define the list of xml tags which we expect to process
+    knowntags = [ ]
+
+    #Define the list of xml tag attributes which we expect to process
+    knownattributes = []
+
+    #Ensure that there is not any unexpected tag and attribute
+    checkunktags( knowntags, ET.tostring(root) )
+    checkunkattr( knownattributes, ET.tostring(root) )
+
+    #Set csv headers
+    lines=[ "" ]
+    for app in root.findall( "application" ):
 
 policies2csv()
 objects2csv()
@@ -389,3 +507,5 @@ users2csv()
 nat2csv()
 apps2csv()
 routes2csv()
+system2csv()
+adminacess2csv()
