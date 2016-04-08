@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import re
 import ipaddress as ip
+import argparse
 
 #Variables to access to the input (xml) and output (csv) files 
 path = "."
@@ -22,7 +23,12 @@ logfile="csv2checkpoint.log"
 
 #Options to automatize optimizations
 avoidduplicatedobjects = False
-grouprules = True
+
+parser = argparse.ArgumentParser()
+parser.add_argument( "-p", "--policyname", dest="policyname", default="Standard", help="The name of the Checkpoint policy in which to import the rules", type=str  )
+parser.add_argument( "-g", "--groupby", dest="groupby", default="auto", help="Which way to use for grouping rules [source|destination|service|raw|auto]", type=str  )
+parser.add_argument( "-n", "--rulenumber", dest="rulenumber", default=0, help="The number of the las rule in the rulebase, the new rules will follow it", type=int  )
+args = vars( parser.parse_args() )
 
 def objectadded( name, objtype ):
     """
@@ -190,10 +196,15 @@ def importservices():
     lines = []
     passwords = []
     objects = getcsvlines( "applications.csv" )
+    f = open( "cpservices.txt", "r" )
+    for line in f.readlines():
+        cpservices = line.replace( "\n","" )
+    f.close()
     for line in objects:
+        print line
         name,proto,src,dst = line.split( "," )
         name = swapname( name, "service" )
-        if objectadded ( name, "service" ):
+        if objectadded ( name, "service" ) or name in cpservices:
             continue
 
         if src != "0-65535" and src != "1-65535":
@@ -316,7 +327,17 @@ def optimizerules ( rules ):
     grouped [ "samesrc" ] = groupbysource ( rules )
     grouped [ "samesrv" ] = groupbyservice ( rules )
     
-    lessrules = sorted ( { "samedest": len( grouped [ "samedest" ] ), "samesrc": len( grouped [ "samesrc" ] ), "samesrv": len( grouped [ "samesrv" ] ) } )[ 0 ]
+    groupby = args[ "groupby" ]
+
+    if groupby == "source":
+        lessrules = "samesrc"
+    elif groupby == "destination":
+        lessrules =  "samedest"
+    elif groupby == "service":
+        lessrules = "samesrv"
+    elif groupby == "auto":
+        lessrules = sorted ( { "samedest": len( grouped [ "samedest" ] ), "samesrc": len( grouped [ "samesrc" ] ), "samesrv": len( grouped [ "samesrv" ] ) } )[ -1 ]
+
     retrules = []
     i=0
     for key, value in grouped[ lessrules ].items():
@@ -344,27 +365,28 @@ def unhiderules ( rules ):
 def importpolicies():
     print "Importing access policies"
     lines=[]
-    i=0
+    i=args[ "rulenumber" ]
     objects = getcsvlines( "policies.csv" )
-    if grouprules == True:
+    if args[ "groupby" ] != "raw":
         objects = optimizerules ( objects )
     #objects = unhiderules ( objects )
     for line in objects:
         name,action,log,source,destination,application,disabled = line.split( "," )
         if objectadded ( "From: " + source + " To: " + destination + " Service: " + application + " Action: " + action + " Disable: " + disabled, "policy" ):
             continue
-        lines.append( "addelement fw_policies ##Standard rule security_rule" )
-        lines.append( "modify fw_policies ##Standard rule:" + str(i) + ":name " + name )
-        lines.append( "modify fw_policies ##Standard rule:" + str(i) + ":disabled " + disabled )
-        lines.append( "rmbyindex fw_policies ##Standard rule:" + str(i) + ":track 0" )
-        lines.append( "addelement fw_policies ##Standard rule:" + str(i) + ":track tracks:" + log )
-        lines.append( "addelement fw_policies ##Standard rule:" + str(i) + ":time globals:Any" )
-        lines.append( "addelement fw_policies ##Standard rule:" + str(i) + ":install:'' globals:Any" )
-        #lines.append( "rmbyindex fw_policies ##Standard rule:" + str(i) + ":action 0" )
+        polname = args[ "policyname" ]
+        lines.append( "addelement fw_policies ##" + polname + " rule security_rule" )
+        lines.append( "modify fw_policies ##" + polname + " rule:" + str(i) + ":name " + name )
+        lines.append( "modify fw_policies ##" + polname + " rule:" + str(i) + ":disabled " + disabled )
+        lines.append( "rmbyindex fw_policies ##" + polname + " rule:" + str(i) + ":track 0" )
+        lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":track tracks:" + log )
+        lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":time globals:Any" )
+        lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":install:'' globals:Any" )
+        #lines.append( "rmbyindex fw_policies ##" + polname + " rule:" + str(i) + ":action 0" )
         if action == "accept":
-            lines.append( "addelement fw_policies ##Standard rule:" + str(i) + ":action accept_action:" + action )
+            lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":action accept_action:" + action )
         elif action == "deny":
-            lines.append( "addelement fw_policies ##Standard rule:" + str(i) + ":action drop_action:drop" )
+            lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":action drop_action:drop" )
 
         for src in source.split( " " ):
             if src in urls:
@@ -422,12 +444,12 @@ def importpolicies():
 def importnat():
     print "NAT import not yet implemented!!!!"
 
-importobjects()
-importpools()
-importusers()
+#importobjects()
+#importpools()
+#importusers()
 importservices()
-importservicegroups()
-importnat()
+#importservicegroups()
+#importnat()
 importpolicies()
 
 #orden dbedit: objects, services, service-groups, pools, policies, nat
