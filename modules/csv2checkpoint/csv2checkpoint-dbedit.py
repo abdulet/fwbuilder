@@ -404,8 +404,8 @@ def importpolicies():
             else:
                 src = "network_objects:" + swapname( src, "object" )
 
-            lines.append( "addelement fw_policies ##Standard rule:" + str(i) + ":src:'' " + src )
-            lines.append( "modify fw_policies ##Standard rule:" + str(i) + ":src:op ''" )
+            lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":src:'' " + src )
+            lines.append( "modify fw_policies ##" + polname + " rule:" + str(i) + ":src:op ''" )
 
         for dst in destination.split( " " ):
             if dst in urls:
@@ -425,15 +425,15 @@ def importpolicies():
             else:
                 dst = "network_objects:" + swapname( dst, "object" )
 
-            lines.append( "addelement fw_policies ##Standard rule:" + str(i) + ":dst:'' " + dst )
-            lines.append( "modify fw_policies ##Standard rule:" + str(i) + ":dst:op ''" )
+            lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":dst:'' " + dst )
+            lines.append( "modify fw_policies ##" + polname + " rule:" + str(i) + ":dst:op ''" )
         
         for app in application.split( " " ):
             if app == "any":
                 app = "globals:Any"
             else:
                 app = "services:" + swapname( app, "service" )
-            lines.append( "addelement fw_policies ##Standard rule:" + str(i) + ":services:'' " + app )
+            lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":services:'' " + app )
 
         i += 1
 
@@ -444,12 +444,12 @@ def importpolicies():
 def importnat():
     print "NAT import not yet implemented!!!!"
 
-#importobjects()
+importobjects()
 #importpools()
 #importusers()
-importservices()
+#importservices()
 #importservicegroups()
 #importnat()
-importpolicies()
+#importpolicies()
 
 #orden dbedit: objects, services, service-groups, pools, policies, nat
