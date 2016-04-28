@@ -2,11 +2,13 @@
 import re
 import ipaddress as ip
 import argparse
+import config as cfg
+import sys
 
-#Variables to access to the input (xml) and output (csv) files 
-path = "."
-dir_csv = "../../csv"
-dir_cp = "cpscripts"
+#Adds libs dir to sys.path
+sys.path.insert( 0, cfg.libdir )
+#import expect module
+import expect
 
 #Dictionary to store all url objects
 urls = {}
@@ -19,15 +21,34 @@ duplicatedaddressbyname = {}
 #Dictionary to store all elementes already added to any checkpoint script
 #its mission is avoid duplicated objects
 addedelements = {} 
-logfile="csv2checkpoint.log"
 
-#Options to automatize optimizations
-avoidduplicatedobjects = False
+"""
+TODO:
+    Minimal changes:
+        Move update_all to the writecpscript function
+    Important changes:
+        Connect to the management and get: objects, applications, users... to adapt to the config and avoid duplicities
+"""
+
+#Set the variables from config file
+SMSip=cfg.SMSip
+SMSuser=cfg.SMSuser
+SMSpwd=cfg.SMSpwd
+path = cfg.path 
+dir_csv = cfg.dir_csv
+dir_cp = cfg.dir_cp
+logfile = cfg.logfile
+avoidduplicatedobjects = cfg.avoidduplicatedobjects
+groupby = cfg.groupby
+rulenumber = cfg.rulenamenumber
+rulenamenumber = cfg.rulenamenumber
+policyname = cfg.policyname
 
 parser = argparse.ArgumentParser()
 parser.add_argument( "-p", "--policyname", dest="policyname", default="Standard", help="The name of the Checkpoint policy in which to import the rules", type=str  )
-parser.add_argument( "-g", "--groupby", dest="groupby", default="auto", help="Which way to use for grouping rules [source|destination|service|raw|auto]", type=str  )
+parser.add_argument( "-g", "--groupby", dest="groupby", default="raw", help="Which way to use for grouping rules [source|destination|service|raw|auto]", type=str  )
 parser.add_argument( "-n", "--rulenumber", dest="rulenumber", default=0, help="The number of the las rule in the rulebase, the new rules will follow it", type=int  )
+parser.add_argument( "-rn", "--rulenamenumber", dest="rulenamenumber", default=0, help="The start number that will be concatenate to the rulename, when groupby is not raw", type=int  )
 args = vars( parser.parse_args() )
 
 def objectadded( name, objtype ):
@@ -68,18 +89,18 @@ def swapname ( obj, objtype ):
     obj = obj.replace("/","_")
     replaced = obj
 
-    if obj.find("-ALL") >= 0:
-        replaced = obj.replace("-ALL", "-FULL")
-    elif obj == "netbios-ssn":
-        replaced = "NBT"
-    elif obj.find("interface") >= 0:
-        replaced = obj.replace("interface","int")
-    elif obj.find("INTERFACE")  >= 0 :
-        replaced = obj.replace("INTERFACE","INT")
-    elif re.match( "^[0-9]", obj ) != None:
-        replaced = "unicast-"+obj
-    elif obj.upper() in upperservices:
-        replaced = cpservices[ upperservices.index( obj.upper() ) ]
+    if objtype == "service":
+        if obj.find("-ALL") >= 0:
+            replaced = obj.replace("-ALL", "-FULL")
+        elif obj == "netbios-ssn":
+            replaced = "NBT"
+        elif obj.upper() in upperservices:
+            return False
+    elif objtype == "object":
+        if obj.find("interface") >= 0:
+            replaced = obj.replace("interface","int")
+        elif obj.find("INTERFACE")  >= 0 :
+            replaced = obj.replace("INTERFACE","INT")
 
     if replaced != obj:
         print "INFORMATIONAL: Object name swapped: " + obj + " => " + replaced
@@ -196,15 +217,11 @@ def importservices():
     lines = []
     passwords = []
     objects = getcsvlines( "applications.csv" )
-    f = open( "cpservices.txt", "r" )
-    for line in f.readlines():
-        cpservices = line.replace( "\n","" )
-    f.close()
+
     for line in objects:
-        print line
         name,proto,src,dst = line.split( "," )
         name = swapname( name, "service" )
-        if objectadded ( name, "service" ) or name in cpservices:
+        if name == False or objectadded ( name, "service" ): #or name in cpservices:
             continue
 
         if src != "0-65535" and src != "1-65535":
@@ -339,7 +356,7 @@ def optimizerules ( rules ):
         lessrules = sorted ( { "samedest": len( grouped [ "samedest" ] ), "samesrc": len( grouped [ "samesrc" ] ), "samesrv": len( grouped [ "samesrv" ] ) } )[ -1 ]
 
     retrules = []
-    i=0
+    i=rulenamenumber
     for key, value in grouped[ lessrules ].items():
         #Build csv format again
         log = value[ "log" ]
@@ -432,8 +449,12 @@ def importpolicies():
             if app == "any":
                 app = "globals:Any"
             else:
-                app = "services:" + swapname( app, "service" )
-            lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":services:'' " + app )
+                app = swapname( app, "service" )
+                if app != False:
+                    app = "services:" + app
+
+            if app != False:
+                lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":services:'' " + app )
 
         i += 1
 
@@ -445,11 +466,11 @@ def importnat():
     print "NAT import not yet implemented!!!!"
 
 importobjects()
-#importpools()
-#importusers()
-#importservices()
-#importservicegroups()
-#importnat()
-#importpolicies()
+importpools()
+importusers()
+importservices()
+importservicegroups()
+importnat()
+importpolicies()
 
 #orden dbedit: objects, services, service-groups, pools, policies, nat
