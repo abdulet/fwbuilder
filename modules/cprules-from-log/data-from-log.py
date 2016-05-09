@@ -99,6 +99,9 @@ def getspecialapplication( proto, port ):
     
     return False
     
+def getcorrelativeservices( rules ):
+    #Sort rules by 
+
 def getconnections( logfile=None ):
     try:
         f = open( logfile, "r" )
@@ -151,7 +154,7 @@ def getconnections( logfile=None ):
         else:
             srcobj = [ "ip", "imphost_"+source, source, "255.255.255.255", "" ]
             source = "imphost_"+source
-        objects2add[ source ] = srcobj
+        #objects2add[ source ] = srcobj
 
         #if not isdefined( srcobj, "object" ):
         #        objects.append( ",".join( srcobj ) )
@@ -162,7 +165,7 @@ def getconnections( logfile=None ):
         else:
             dstobj = [ "ip", "imphost_"+destination, destination, "255.255.255.255", "" ]
             destination = "imphost_"+destination
-        objects2add[ destination ] = dstobj
+        #objects2add[ destination ] = dstobj
 
         #if not isdefined( dstobj, "object" ):
         #    objects.append( ",".join( dstobj ) )
@@ -179,17 +182,58 @@ def getconnections( logfile=None ):
         else:
             application = getspecialapplication( proto, port )
 
-        if not application and direction == "incoming":
-            #Skip non standard applications
-            print "Non standard application in rule"
-            print line
-            continue
-            #if not isdefined( [ proto + "_" + port, proto, "1-65535", port ], "application" ) :
-                #The service is not defined in CP, we should add it
-            #    applications.append( ",".join( [ "imp_" + proto + "_" + port, proto, "1-65535", port ] ) )
-            #application = "imp_" + proto + "_" + port
-
+        if not application:
+            if direction == "incoming":
+                #Skip non standard applications
+                print "Non standard application for incoming connection"
+                print line
+                continue
+            else:
+                if not isdefined( [ proto + "_" + port, proto, "1-65535", port ], "application" ) :
+                    #The service is not defined in CP, we should add it
+                    applications.append( ",".join( [ "imp_" + proto + "_" + port, proto, "1-65535", port ] ) )
+                application = "imp_" + proto + "_" + port
+                
         
+
+
+        #ruleAdded = False
+        #name = direction + str(i)
+        #if direction == "incoming":
+        #    if not application:
+        #        #Skip non standard applications
+        #        print "Non standard application for incoming connection"
+        #        print line
+        #        continue
+
+        #    rule = [ name,action,log,source,destination,application,disabled ]
+        #    if not isdefined( rule, "policy" ) :
+        #        inrules.append( ",".join( rule ) )
+        #        ruleAdded = True
+        #        i+=1
+        #elif direction == "outgoing":
+        #    if not application:
+        #        if not isdefined( [ proto + "_" + port, proto, "1-65535", port ], "application" ) :
+        #            #The service is not defined in CP, we should add it
+        #            applications.append( ",".join( [ "imp_" + proto + "_" + port, proto, "1-65535", port ] ) )
+        #        application = "imp_" + proto + "_" + port
+
+        #    rule = [ name,action,log,source,destination,application,disabled ]
+        #    if not isdefined( rule, "policy" ) :
+        #        outrules.append( ",".join( rule ) )
+        #        i+=1
+        #        ruleAdded = True
+        #    else:
+        #        print "Defined rule:\n" + line
+
+        #if ruleAdded == True:
+        #    if not isdefined( srcobj, "object" ):
+        #        objects.append( ",".join( srcobj ) )
+
+        #    if not isdefined( dstobj, "object" ):
+        #        objects.append( ",".join( dstobj ) )
+            
+
         if direction == "outgoing":
             if not source in rules[ direction ]:
                 rules[ direction ] [ source ] = {}
@@ -237,7 +281,6 @@ def getconnections( logfile=None ):
                                 #The service is not defined in CP, we should add it
                                 applications.append( ",".join( [ "imp_" + proto + "_" + port, proto, "1-65535", port ] ) )
                             app = "imp_" + proto + "_" + port
-
                         #if len ( rules[ direction ][ destination ] ) > 10:
                         #    app = "any"
                         name = direction + str(i)
