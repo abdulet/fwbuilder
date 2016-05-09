@@ -360,17 +360,19 @@ def optimizerules ( rules ):
     for key, value in grouped[ lessrules ].items():
         #Build csv format again
         log = value[ "log" ]
-        name = lessrules + str(i)
         if lessrules == "samedest":
             destination, action, disabled, application = key.split(",")
             source = " ".join( value["sources"] )
+            name = destination
         elif lessrules == "samesrc":
             source, action, disabled, application = key.split(",")
             source = " ".join( value["destinations"] )
+            name = source
         elif lessrules == "samesrv":
             application, action, disabled = key.split(",")
             source = " ".join( value["sources"] )
             destination = " ".join( value["destinations"] )
+            name = application
         retrules.append( ",".join( [ name,action,log,source,destination,application,disabled ] ) )
         i+=1
     return retrules
@@ -386,6 +388,10 @@ def importpolicies():
     objects = getcsvlines( "policies.csv" )
     if args[ "groupby" ] != "raw":
         objects = optimizerules ( objects )
+        f = open("rules-optimized.csv", "w")
+        for line in objects:
+            f.write( line + "\n" )
+        f.close()
     #objects = unhiderules ( objects )
     for line in objects:
         name,action,log,source,destination,application,disabled = line.split( "," )
@@ -449,11 +455,12 @@ def importpolicies():
             if app == "any":
                 app = "globals:Any"
             else:
+                origapp = app
                 app = swapname( app, "service" )
-                if app != False:
-                    app = "services:" + app
+                if app == False:
+                    app = origapp
+                app = "services:" + app
 
-            if app != False:
                 lines.append( "addelement fw_policies ##" + polname + " rule:" + str(i) + ":services:'' " + app )
 
         i += 1
@@ -466,11 +473,11 @@ def importnat():
     print "NAT import not yet implemented!!!!"
 
 importobjects()
-importpools()
-importusers()
+#importpools()
+#importusers()
 importservices()
-importservicegroups()
-importnat()
+#importservicegroups()
+#importnat()
 importpolicies()
 
 #orden dbedit: objects, services, service-groups, pools, policies, nat
